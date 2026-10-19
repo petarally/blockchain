@@ -1,0 +1,47 @@
+:root {
+  --bg: #f6f4ef;
+  --card: #ffffff;
+  --text: #1f2430;
+  --muted: #6b7280;
+  --primary: #c2562b;
+  --primary-dark: #9c4222;
+  --ok: #2f855a;
+  --warn: #b7791f;
+  --bad: #c53030;
+  --border: #e5e1d8;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); }
+a { color: var(--primary); text-decoration: none; }
+h1, h2, h3 { margin: 0 0 .5rem; }
+
+.container { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; }
+.muted { color: var(--muted); font-size: .9rem; }
+.row { display: flex; justify-content: space-between; align-items: center; gap: .75rem; }
+.stack > * + * { margin-top: 1rem; }
+
+button, .btn {
+  background: var(--primary); color: #fff; border: 0; border-radius: 8px;
+  padding: .55rem 1rem; font-size: .95rem; cursor: pointer;
+}
+button:hover { background: var(--primary-dark); }
+button:disabled { background: #cbc6bb; cursor: not-allowed; }
+button.secondary { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+
+input, textarea {
+  width: 100%; padding: .55rem .7rem; border: 1px solid var(--border);
+  border-radius: 8px; font: inherit; background: #fff;
+}
+label { display: block; font-size: .85rem; color: var(--muted); margin-bottom: .25rem; }
+
+.badge { font-size: .75rem; padding: .15rem .55rem; border-radius: 999px; background: #eee; }
+.badge.active { background: #fdebd9; color: var(--warn); }
+.badge.success { background: #dcf3e5; color: var(--ok); }
+.badge.failed { background: #fbdcdc; color: var(--bad); }
+
+.notice { background: #fff8e1; border: 1px solid #f1deb0; border-radius: 8px; padding: .6rem .9rem; font-size: .85rem; }
+.toast { position: fixed; bottom: 1rem; right: 1rem; background: var(--text); color: #fff; padding: .7rem 1rem; border-radius: 8px; }
