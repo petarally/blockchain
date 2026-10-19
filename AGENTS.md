@@ -1,17 +1,20 @@
 # Pravila projekta
 
 ## Projekt
-- Naziv: (upiši)
-- Zajednica: (upiši, npr. kafić "Kod Šime")
-- Opis: (jedna rečenica: što aplikacija radi i za koga)
+
+- Naziv: RenoFund
+- Zajednica: investitori, zaljubljenici u nekretnine i investiranje u nekretnine
+- Opis: Crowdfunding aplikacija za renovaciju prostorija u nekretnini OP-a: investitori u kampanjama uplaćuju ETH i dobivaju zajednički token OP-a, koji im daje udio u prihodu razmjerno broju tokena.
 
 ## Stack (koristi točno ove verzije)
+
 - Frontend: Vue 3 (script setup), Pinia, Vite, u mapi frontend/
 - Pametni ugovori (od T4): Solidity ^0.8.24, OpenZeppelin Contracts 5.x,
   Hardhat 3 (ESM, TypeScript), testovi: Mocha + ethers v6
 - Mreža: Sepolia (chainId 11155111)
 
 ## Pravila rada
+
 - Prije pisanja koda predloži kratak plan i pričekaj potvrdu.
 - Mijenjaj samo datoteke potrebne za zadatak.
 - Ne dodaj nove biblioteke bez pitanja.
@@ -22,4 +25,5 @@
 - Na kraju ukratko objasni što si promijenio i zašto.
 
 ## Greške koje je AI već radio u ovom projektu
+
 - (dopunjava student)
