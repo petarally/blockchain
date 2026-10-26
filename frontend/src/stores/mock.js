@@ -1,12 +1,10 @@
 import { defineStore } from 'pinia'
+import { useWalletStore } from './wallet'
 
 const TOKENS_PER_ETH = 1000
-const MY_ADDRESS = '0x1234567890abcdef1234567890abcdef12345678'
 
 export const useMockStore = defineStore('mock', {
   state: () => ({
-    connected: false,
-    address: MY_ADDRESS,
     ethBalance: 5,
     tokens: 2500,
     totalSupply: 40000,
@@ -59,7 +57,8 @@ export const useMockStore = defineStore('mock', {
   }),
 
   getters: {
-    shortAddress: (s) => s.address.slice(0, 6) + '...' + s.address.slice(-4),
+    // spajanje novcanika je stvarno (wallet store), ostalo je jos mock
+    connected: () => useWalletStore().connected,
     // provizija koju moze povuci: udio u fondu minus vec povuceno
     pendingCommission: (s) =>
       Math.max(0, (s.tokens / s.totalSupply) * s.revenuePool - s.claimed),
@@ -70,10 +69,6 @@ export const useMockStore = defineStore('mock', {
     notify(msg) {
       this.toast = msg
       setTimeout(() => (this.toast = ''), 2500)
-    },
-    connect() {
-      this.connected = true
-      this.notify('Novčanik spojen (lažno)')
     },
     tokensFor(eth) {
       return Math.floor(Number(eth) * TOKENS_PER_ETH)
