@@ -63,3 +63,32 @@
 - Što sam dodao u AGENTS.md: ništa
 - Provjera: pročitao sam SPEC.md nakon izmjena i provjerio da prihvaćeni nalazi imaju kriterije
 - Commit: 2.11.2026.
+
+## T4 — Provjera kriterija prihvaćanja za token RENO (2.11.2026.)
+
+- Cilj termina: Usporediti očekivano (docs/SPEC.md) i dobiveno za kriterije koje pokriva ugovor RenoFundToken
+- Način provjere: nema sučelja za klikanje; pokrenuo sam `npx hardhat test` (30 testova prolazi). Stupac "Što sam napravio" je poziv koji test izvodi, a "Dobiveno" je stvarni ishod testa.
+
+| Kriterij | Što sam napravio | Očekivano | Dobiveno (poruka iz testa) |
+|---|---|---|---|
+| K1 | Vlasnik izdao 10 000 REN adresi A | Stanje A i ukupna količina 10 000 | Isto |
+| K2 | S računa koji nije vlasnik pozvao mint | Pada: "Samo vlasnik smije pozvati" | Pada: "Samo vlasnik smije pozvati" |
+| K3 | mint 10 001 REN | Pada: "Iznos prelazi 10000 REN po izdavanju" | Pada: "Iznos prelazi 10000 REN po izdavanju" |
+| K4 | Ukupna količina 995 000, mint 10 000 | Pada: "Prekoracena ukupna kolicina od 1000000 REN" | Pada: "Prekoracena ukupna kolicina od 1000000 REN" |
+| K5 | mint s iznosom 0 | Pada: "Iznos mora biti veci od nule" | Pada: "Iznos mora biti veci od nule" |
+| K6 | A (10 REN) poslao 4 REN adresi B | A 6, B 4 | A 6, B 4 |
+| K7 | A (3 REN) poslao 4 REN | Pada: "Nedovoljno stanja" | Pada: "Nedovoljno stanja" |
+| K8 | C (odobrenje 2) pozvao transferFrom za 3 | Pada: "Nedovoljno odobrenje" | Pada: "Nedovoljno odobrenje" |
+| K9 | A (10 REN) spalio 4 | A 6, ukupna količina 6 | A 6, ukupna količina 6 |
+| K10 | A (3 REN) spalio 4 | Pada: "Nedovoljno tokena za spaljivanje" | Pada: "Nedovoljno tokena za spaljivanje" |
+| K11 | transferOwnership na nultu adresu | Pada: "Nova adresa nije valjana" | Pada: "Nova adresa nije valjana" |
+| K37 | setCampaignContract dvaput | Prvi uspijeva, drugi pada: "Ugovor kampanja je vec postavljen" | Isto |
+| K38 | Ukupna količina 1 000 000, A spalio 10, vlasnik izdao 10 | Izdavanje uspijeva, ukupna količina 1 000 000 | Isto (prije spaljivanja mint pada, nakon uspijeva) |
+| K39 | Rezervirano 10 000 uz 990 000 u optjecaju, mint 1 | Pada: "Prekoracena ukupna kolicina od 1000000 REN" | Pada: "Prekoracena ukupna kolicina od 1000000 REN" |
+| K49 | renounceOwnership | Pada: "Odricanje nije dopusteno" | Pada: "Odricanje nije dopusteno" |
+| K50 | mint na nultu adresu | Pada: "Adresa nije valjana" | Pada: "Adresa nije valjana" |
+| K12–K36, K40–K48, K51 | Nisam pokretao | Ovise o ugovoru kampanja | Nije provjereno: ugovor kampanja još ne postoji (u contracts/ je samo token) |
+
+- Nalazi: nema odstupanja između očekivanog i dobivenog za 17 provjerenih kriterija, pa nije bilo što ispravljati ni u kodu ni u SPEC.md. Kriteriji kampanje ostaju neprovjereni dok se ne napiše ugovor kampanja.
+- Što sam dodao u AGENTS.md: ništa
+- Commit:
