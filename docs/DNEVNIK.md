@@ -39,3 +39,27 @@
 - Što sam dodao u AGENTS.md: ništa
 - Provjera: vite build prolazi; u browseru se wallet spojio nakon prelaska na EIP-6963
 - Commit: 26.10.2026.
+
+## T3 — Specifikacija i recenzija specifikacije (2.11.2026.)
+
+- Cilj termina: Napisati docs/SPEC.md (token RENO + modul Skupljanje sredstava) i kritički je recenzirati
+- Recenzija specifikacije: nalazi (brojevi odgovaraju recenziji) i odluke
+
+| Nalaz | Odluka (prihvaćeno / odbijeno) | Obrazloženje |
+|---|---|---|
+| 1.1 Nije definirano kako ugovor kampanja dobiva pravo izdavanja (mint "samo vlasnik" vs. Matrica) | prihvaćeno | Prava kontradikcija: bez toga claimTokens ne može raditi. Dodani setCampaignContract (jednom, samo vlasnik), K36 i K37. |
+| 1.2 K35 propisuje da uplatitelj ostane bez tokena kad je ETH već isplaćen | prihvaćeno | Kvar je ugrađen kao pravilo i protivi se Opisu. Uvedena rezervacija tokena pri uplati; uplata se odbija ako ne stane (K35 prepravljen). |
+| 1.3 "Ukupna količina" nije definirana (optjecaj ili ikad izdano) | prihvaćeno | Granica je na stanje u optjecaju; spaljivanje oslobađa mjesto (K38, K39). |
+| 1.4 / 1.5 Granica roka i "cilj dosegnut" nisu definirani | prihvaćeno | Uplata dok je trenutak < rok; povrat, isplata i preuzimanje kad je trenutak >= rok; cilj dosegnut kad je prikupljeno >= cilj (K40–K43). |
+| 2.7 / 2.8 Prisilno poslani ETH i ponovni ulaz (reentrancy) | prihvaćeno | Isplate se računaju iz zabilježenih iznosa, a ne iz salda; stanje se mijenja prije slanja ETH-a (K45–K48). |
+| 3.2 Vlasnik uplaćuje, isplati sebi i preuzme tokene besplatno | prihvaćeno | Jednostavno rješenje bez nove uloge: vlasnik ne smije uplaćivati (K44). |
+| 3.5 renounceOwnership ostavljen otvoren | prihvaćeno | Jedan poziv trajno gasi izdavanje i zaključava ETH; onemogućeno (K49). |
+| 3.1 Vlasnik može izdati sebi svih 1 000 000 REN bez uplate | odbijeno (kao ograničenje izdavanja); rizik zabilježen | "Izdaje samo vlasnik" je moja svjesna odluka iz razgovora (pitanje 3). Rezervacija ipak štiti tokene već dugovane uplatiteljima. Preostali rizik zapisan u Otvorena pitanja 5. |
+| 3.3 Minimalni cilj kampanje (npr. 1 wei) | odbijeno | Cilj određuje vlasnik, a investitor ga vidi prije uplate. Svaki prag bio bi proizvoljan, a investitor sam procjenjuje je li kampanja smislena. |
+| 3.4 Dvostupanjski prijenos vlasništva | odbijeno | Dodaje novu funkciju i stanje, a nije traženo odlukom o administratorima. Rizik pogrešne adrese zabilježen u Otvorena pitanja 4. |
+
+- Što je AI napravio dobro: pronašao je stvarne kontradikcije (K35, izdavanje preko ugovora kampanja) koje su bile ugrađene u moju specifikaciju
+- Što je AI napravio drugačije nego što sam očekivao: nekoliko nalaza traži moju odluku o pravilima, a ne samo dopunu testova
+- Što sam dodao u AGENTS.md: ništa
+- Provjera: pročitao sam SPEC.md nakon izmjena i provjerio da prihvaćeni nalazi imaju kriterije
+- Commit: 2.11.2026.
